@@ -9,7 +9,7 @@ def get_weather_data(date):
     if response.status_code == 200:
         data = response.json()
         for item in data['list']:
-            if item['dt_txt'].split()[0] == date:
+            if item['dt_txt'] == date:
                 return item['main']['temp']
         return None
     else:
@@ -22,7 +22,7 @@ def get_wind_speed(date):
     if response.status_code == 200:
         data = response.json()
         for item in data['list']:
-            if item['dt_txt'].split()[0] == date:
+            if item['dt_txt'] == date:
                 return item['wind']['speed']
         return None
     else:
@@ -35,7 +35,7 @@ def get_pressure(date):
     if response.status_code == 200:
         data = response.json()
         for item in data['list']:
-            if item['dt_txt'].split()[0] == date:
+            if item['dt_txt'] == date:
                 return item['main']['pressure']
         return None
     else:
@@ -48,21 +48,21 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            date = input("Enter the date (YYYY-MM-DD): ")
+            date = input("Enter the date (YYYY-MM-DD HH:mm:ss): ")
             temperature = get_weather_data(date)
             if temperature is not None:
                 print(f"Temperature on {date}: {temperature} K")
             else:
                 print("Data not found for the specified date.")
         elif choice == '2':
-            date = input("Enter the date (YYYY-MM-DD): ")
+            date = input("Enter the date (YYYY-MM-DD HH:mm:ss): ")
             wind_speed = get_wind_speed(date)
             if wind_speed is not None:
                 print(f"Wind Speed on {date}: {wind_speed} m/s")
             else:
                 print("Data not found for the specified date.")
         elif choice == '3':
-            date = input("Enter the date (YYYY-MM-DD): ")
+            date = input("Enter the date (YYYY-MM-DD HH:mm:ss): ")
             pressure = get_pressure(date)
             if pressure is not None:
                 print(f"Pressure on {date}: {pressure} hPa")
